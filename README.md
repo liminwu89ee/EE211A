@@ -1,4 +1,4 @@
-# EE211A Digital Image Processing Project (Remasted version)
+# UCLA Electrical Engineering - EE211A Digital Image Processing Project (Remasted version)
 by Limin Wu, Qi Wang
 
 This code is not final, we are still working on it for better performance.
