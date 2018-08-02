@@ -12,4 +12,4 @@ General work flow:
 5. run main_training.py to generate model.
 6. run main_prediction.py to generate reconstructed 3D model from dummy X-ray images.
 7. run main_generateView.py to generate different views of ground-truth 3D model and reconstructed 3D model.
-8. (evaluate the reconstruction, to be uploaded)
+8. run main_validation.py to evaluate the result
