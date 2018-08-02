@@ -11,11 +11,11 @@ import pandas as pd
 from getPatch import getPatch
 
 with open('config.pkl', 'rb') as f:  
-    viewpoints, fileNames, part, version, resolution, windowSize, numTrainPerFile = pickle.load(f)
+    viewpoints, fileNames, testFileNames, part, version, resolution, windowSize, numTrainPerFile, method = pickle.load(f)
 
 
 for fileName in fileNames:
-    print("Processinf file:" + fileName )
+    print("Processing file:" + fileName )
     matrix = np.load("matrix3D/matrix3D_" + fileName + '_' + part + '_' + str(resolution) + ".npy")
     metadataFileName = "metadata/meta_" + fileName + '_' + part + '_' + str(resolution) + ".pkl"
     

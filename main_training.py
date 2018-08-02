@@ -10,16 +10,17 @@ import numpy as np
 import pickle
 from getModel_ANN import getModel_ANN
 from getModel_logistic import getModel_logistic
+from getModel_SVM import getModel_SVM
 
 with open('config.pkl', 'rb') as f:  
-    viewpoints, fileNames, part, version, resolution, windowSize, numTrainPerFile = pickle.load(f)
+    viewpoints, fileNames, testFileNames, part, version, resolution, windowSize, numTrainPerFile, method = pickle.load(f)
 
 y = []
 x = []
 pixels = []
 
 for fileName in fileNames:
-    print("Processinf file:" + fileName )
+    print("Processing file:" + fileName )
     y_newfile = []
     x_newfile = []
     pixels_newfile = []
@@ -72,10 +73,20 @@ print("pixels size:")
 print(len(pixels))
 print(len(pixels[0]))
 # value(True/False), X, Y, Z, radial, azimuthal(radius), polar(radius), Pixels(len = 6*windowSize^2)
-#getModel_ANN(y, x, pixels)
-model = getModel_logistic(y, x, pixels)
+print("Training start, method = ", method)
+if ( method == 'Logistic'):
+    
+    model = getModel_logistic(y, x, pixels)
+    modelFilename = "Logistic_" + version
+    
+if ( method == 'ANN'):
+    model = getModel_ANN(y, x, pixels)
+    modelFilename = "ANN_" + version
 
-modelFilename = "Logistic_" + version
+if ( method == 'SVM'):
+    model = getModel_SVM(y, x, pixels)
+    modelFilename = "ANN_" + version
+print("Training done")
 pickle.dump(model, open( 'model/' + modelFilename, 'wb'))
 
 

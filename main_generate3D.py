@@ -9,10 +9,10 @@ import pickle
 from SWCto3D import SWCto3D
 
 with open('config.pkl', 'rb') as f:  
-    viewpoints, fileNames, part, version, resolution, windowSize, numTrainPerFile = pickle.load(f)
+    viewpoints, fileNames, testFileNames, part, version, resolution, windowSize, numTrainPerFile, method = pickle.load(f)
 
-for fileName in fileNames:
-    print("Processinf file:" + fileName )
+for fileName in (fileNames + testFileNames):
+    print("Processing file:" + fileName )
     metadata, matrix = SWCto3D( "input/" + fileName + ".CNG.swc", resolution, part) #'full', 'left', 'right'
     np.save("matrix3D/matrix3D_" + fileName + '_' + part + '_' + str(resolution), matrix)
     

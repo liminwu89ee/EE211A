@@ -11,10 +11,10 @@ from get2Dfrom3D import get2Dfrom3D
 from conv3Dto2D import get2DLeft
 
 with open('config.pkl', 'rb') as f:  
-    viewpoints, fileNames, part, version, resolution, windowSize, numTrainPerFile = pickle.load(f)
+    viewpoints, fileNames, testFileNames, part, version, resolution, windowSize, numTrainPerFile, method = pickle.load(f)
 
-for fileName in fileNames:
-    print("Processinf file:" + fileName )
+for fileName in (fileNames + testFileNames):
+    print("Processing file:" + fileName )
     matrix = np.load("matrix3D/matrix3D_" + fileName + '_' + part + '_' + str(resolution) + ".npy")
     #leftView = get2DLeft(matrix)
     #cv2.imshow( "test " + fileName, leftView)

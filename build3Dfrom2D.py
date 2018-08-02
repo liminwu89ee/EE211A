@@ -47,6 +47,8 @@ def build3Dfrom2D (viewpoints, images2D, model, resolution, part, windowSize):
                 
                 cord_org = np.array([x,y,z,1], np.float)
                 pixelsString = ""
+                
+                backProjectionResult = True
                 for i in range(len(viewpoints)):
                     T = Ts[i]
                     image = images2D[i]
@@ -58,6 +60,9 @@ def build3Dfrom2D (viewpoints, images2D, model, resolution, part, windowSize):
                         patch = image[ y_new-halfWindowSize:y_new+halfWindowSize+1 , z_new-halfWindowSize:z_new+halfWindowSize+1 ]
                     patchstring = '\t'.join('\t'.join('%d' %x for x in y) for y in patch)
                     pixelsString += patchstring + '\t'
+                    
+                    if (image[ y_new, z_new] != 255):
+                        backProjectionResult = False
                 
                 temp = np.fromstring( pixelsString, dtype = np.uint8, sep='\t').tolist()
                 #print(len(temp))
@@ -71,7 +76,10 @@ def build3Dfrom2D (viewpoints, images2D, model, resolution, part, windowSize):
                 #print(features.shape)
                 
                 predictResult = model.predict(features)
-                if (predictResult):
+                
+                
+                #if (predictResult and backProjectionResult):
+                if (predictResult ):
                     predictedMatrix[x][y][z] = 255
                 else:
                     predictedMatrix[x][y][z] = 0
