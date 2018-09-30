@@ -11,5 +11,6 @@ General work flow:
 4. run main_generateTraining.py to generate training set in csv format (in "data" folder).
 5. run main_training.py to generate model.
 6. run main_prediction.py to generate reconstructed 3D model from dummy X-ray images.
-7. run main_generateView.py to generate different views of ground-truth 3D model and reconstructed 3D model.
-8. run main_validation.py to evaluate the result
+7. run main_postprocessing.py to postprocess reconstructed 3D model.
+8. run main_generateView.py to generate different views of ground-truth 3D model and reconstructed 3D model.
+9. run main_validation.py to evaluate the result
