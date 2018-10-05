@@ -53,6 +53,7 @@ def build3Dfrom2D (viewpoints, images2D, model, resolution, part, windowSize):
                     T = Ts[i]
                     image = images2D[i]
                     cord_new = np.dot(T, cord_org)
+            
                     y_new = int(round(cord_new[1]))
                     z_new = int(round(cord_new[2]))
                     patch = np.empty(shape=[ windowSize, windowSize]).astype(np.uint8) * 0
@@ -61,7 +62,7 @@ def build3Dfrom2D (viewpoints, images2D, model, resolution, part, windowSize):
                     patchstring = '\t'.join('\t'.join('%d' %x for x in y) for y in patch)
                     pixelsString += patchstring + '\t'
                     
-                    if (image[ y_new, z_new] != 255):
+                    if ( y_new >= resolution or y_new < 0 or z_new >= resolution or z_new < 0 or image[ y_new, z_new] != 255):
                         backProjectionResult = False
                 
                 temp = np.fromstring( pixelsString, dtype = np.uint8, sep='\t').tolist()
